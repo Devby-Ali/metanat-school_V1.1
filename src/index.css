@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: "Estedad Thin";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Estedad/woff2/Estedad-Thin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Estedad Light";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Estedad/woff2/Estedad-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Estedad Medium";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Estedad/woff2/Estedad-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Estedad Bold";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Estedad/woff2/Estedad-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Mikhak-woff2-1";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Mikhak/woff2/Mikhak-VF-FD.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Dirooz";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Dirooz/Dirooz.woff2") format("woff2");
+}
+
+@layer base {
+  html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+  }
+
+  body {
+    line-height: 1.6;
+    font-size: 1.6rem;
+    direction: rtl;
+    word-spacing: -0.15em;
+  }
+
+  *,
+  *::after,
+  *::before {
+    outline: none;
+    box-sizing: inherit;
+  }
+
+  a {
+    text-decoration: none;
+    transition: all 200ms ease;
+  }
+
+  i {
+    user-select: none;
+  }
+}
+
+/* ============================Start Utility============================ */
+@utility container {
+  @apply mx-auto px-4 2xl:px-16 xs:max-w-[480px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px] 2xl:max-w-[1536px];
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility ltr-text {
+  direction: ltr;
+  text-align: left;
+}
+
+@utility main-header__dropdown {
+  opacity: 0;
+  visibility: hidden;
+  @apply absolute top-24 -right-4 w-96 bg-linear-to-t from-transparent via-sky-400/25 via-50% to-transparent backdrop-blur-[7px] text-white transition-all rounded-4xl rounded-br-3xl py-4 border-b-5 border-r-5 border-sky-600 delay-75 z-50 *:first:rounded-tr-2xl *:first:hover:-ml-[10px] *:last:rounded-br-lg *:last:rounded-bl-2xl;
+}
+
+@utility main-header__dropdown-hover {
+  opacity: 1;
+  visibility: visible;
+  top: 7.25rem;
+}
+
+@utility header__dropdown {
+  opacity: 0;
+  visibility: hidden;
+  @apply absolute top-0 right-[23.5rem] h-[27.9rem] overflow-y-auto w-96 bg-linear-to-t from-transparent via-sky-400/25 via-50% to-transparent backdrop-blur-[7px] text-white transition-all  rounded-4xl rounded-br-none py-4 px-3 border-t-5 border-l-5 border-sky-600 delay-150 *:hover:text-purple-500 *:dark:hover:text-purple-400;
+}
+
+@utility main-header__dropdown-item {
+  @apply hover:pl-4 hover:bg-sky-500/10 hover:text-purple-500 dark:hover:text-purple-400 hover:border-l-8 hover:font-EstedadMedium hover:-ml-3 border-sky-600 rounded-r-sm mx-4;
+}
+
+@utility header__dropdown-hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+@utility bg-landing {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(/images/landing/bg_landing1.jpg) no-repeat right bottom;
+  background-size: cover;
+}
+/* ============================End Utility============================ */
+
+/* ============================Start Component============================ */
+@layer components {
+  .overlay {
+    @apply invisible opacity-0 fixed inset-0 w-full h-full bg-black/40 transition-all backdrop-blur-[4px];
+  }
+
+  .overlay--visible {
+    @apply visible opacity-100 z-10;
+  }
+
+  .breadcrumb {
+    display: flex;
+    height: 5.2rem;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 1rem;
+    @apply bg-white dark:bg-slate-800 text-slate-900 dark:text-white/80;
+  }
+
+  .breadcrumb__item {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-shrink: 0;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 4rem;
+  }
+
+  .breadcrumb__item::before {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+    height: 4.3rem;
+    width: 7px;
+    transform: rotate(-35deg);
+    transform-origin: bottom;
+    @apply bg-stone-100;
+  }
+
+  .breadcrumb__item::after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 0;
+    height: 4.3rem;
+    width: 7px;
+    transform: rotate(35deg);
+    transform-origin: top;
+    @apply bg-stone-100;
+  }
+
+  .button-primary {
+    background-color: oklch(0.588 0.158 241.966);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4rem;
+    padding: 0 4rem;
+    gap: 1rem;
+    letter-spacing: -1px;
+    color: #fff;
+  }
+
+  .button-primary:hover {
+    background-color: transparent;
+    box-shadow: 0 0 14px 3px oklch(0.588 0.158 241.966) inset;
+    color: oklch(0.685 0.169 237.323);
+  }
+
+  .shadowLightBlue {
+    box-shadow: 3px 0 8px 1.5px oklch(0.685 0.169 237.323);
+  }
+
+  .sort-btn--active {
+    color: #ad7ffd;
+    border-top: 2px solid #ad7ffd;
+    border-bottom: 2px solid #ad7ffd;
+    padding: 1.6rem 0;
+  }
+
+  .active-menu {
+    position: relative;
+    color: oklch(0.588 0.158 241.966);
+  }
+
+  .active-menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -0.2rem;
+    background-color: oklch(0.685 0.169 237.323);
+    width: 5px;
+    height: 100%;
+  }
+}
+/* ============================End Component=========================== */
+
+/* ============================Custom Theme============================ */
+@theme {
+  --color-amber-50: #fcfaea;
+  --color-amber-100: #f7ecb4;
+  --color-amber-200: #f4e194;
+  --color-amber-300: #eeca56;
+  --color-amber-400: #e7b228;
+  --color-amber-500: #d79a1b;
+  --color-amber-600: #ba7714;
+  --color-amber-700: #945614;
+  --color-amber-800: #7b4418;
+  --color-amber-900: #69391a;
+  --color-amber-950: #3d1d0b;
+  /* ---------------------------------------------------------------------- */
+  --color-robins-egg-blue: #04d0c9;
+  --color-mountain-meadow: #1dbf7b;
+  --color-mariner: #2c68d0;
+  --color-cerulean: #0198de;
+  /* ---------------------------------------------------------------------- */
+  --color-curious-blue: #138ed1;
+  --color-turquoise: #2ce0e6;
+  --color-screamin-green: #81fb66;
+  --color-primrose: #efe6a4;
+  /* ---------------------------------------------------------------------- */
+  --color-dodger-blue: #2a91f8;
+  --color-java: #19b2c6;
+  --color-salem: #159c50;
+  --color-sandwisp: #f0f6b2;
+  /* ---------------------------------------------------------------------- */
+  --color-dodger-blue: #1d7bf7;
+  --color-picton-blue: #53b9ef;
+  --color-purple-heart: #5f2bb8;
+  --color-givry: #f7ecb4;
+  /* ---------------------------------------------------------------------- */
+  --shadow-normal: 0px 1px 12px rgba(0, 0, 0, 0.07);
+  --font-EstedadThin: "Estedad Thin", "sans-serif";
+  --font-EstedadLight: "Estedad Light", "sans-serif";
+  --font-EstedadMedium: "Estedad Medium", "sans-serif";
+  --font-EstedadBold: "Estedad Bold", "sans-serif";
+  --font-MikhakWoff2one: "Mikhak-woff2-1", "sans-serif";
+  --font-Dirooz: "Dirooz", "sans-serif";
+  --breakpoint-xs: 480px;
+}
