@@ -21,9 +21,10 @@ import {
   HiOutlineUser,
   HiPower,
 } from "react-icons/hi2";
+import { GrUserAdmin } from "react-icons/gr";
 import Swal from "sweetalert2";
 import AuthContext from "../../context/authContext";
-import { GrUserAdmin } from "react-icons/gr";
+import { TypeAnimation } from "react-type-animation";
 
 export default function Landing({ info }) {
   const [dark, setDark] = useState(false);
@@ -420,50 +421,26 @@ export default function Landing({ info }) {
       <div className="flex-center">
         <div className="container space-y-13 sm:space-y-20 xl:space-y-30 2xl:space-y-40 text-center text-white">
           <div>
-            <h2 className="text-3xl sm:text-5xl mb-6 sm:mb-20 font-EstedadBold font-bold">
-              {/* <Typewriter
-                onInit={(typeWriter) => {
-                  typeWriter
-                    .typeString("ما به هر قیمتی دوره آموزشی تولید نمی‌کنیم!")
-                    .start()
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString("Sky Tech - آکادمی خصوصی برنامه نویسی")
-                    .start()
-                    .pauseFor(2000);
-                }}
-                options={{
-                  loop: true,
-                }}
-              /> */}
+            <h2 className="text-3xl sm:text-5xl mb-6 sm:mb-20 font-EstedadBold font-bold h-36 leading-normal sm:leading-snug">
+              <TypeAnimation
+                sequence={[
+                  "مونته‌ سوری، ایجاد شناخت و یادگیری از طریق شناخت درونی است",
+                  1000,
+                  "مونته‌ سوری، روش آموزشی است که تمرکز خود را بر روی علایق و فعالیت‌های طبیعی و روزمره کودکان قرار میدهد",
+                  1000,
+                  "مونته‌ سوری، روش آموزشی است که بر پایه‌ی مشاهده و درک طبیعت و نیازهای ذهنی و جسمی کودکان طراحی شده است",
+                  1000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
             </h2>
-            <h3 className="text-xl/relaxed xs:text-2xl sm:text-3xl px-10 xs:px-0">
-              با اسکای آکادمی، برنامه نویسی تخصصی رو به صورت حرفه ای یاد بگیر .
+            <h3 className="text-xl/relaxed xs:text-2xl sm:text-4xl sm:leading-normal px-10 xs:px-0">
+              یک رویکرد آموزشی که بر پایه‌ی توانایی‌های طبیعی کودکان و نیازهای
+              آنها طراحی شده است و به ارتقای مهارت‌های اجتماعی، فردی و تحصیلی
+              آنها کمک می‌کند.
             </h3>
-          </div>
-          <div className="px-6 md:px-0">
-            <div className="max-w-[700px] mx-auto">
-              <form
-                className="flex items-center backdrop-blur-[7px] justify-between border dark:border border-white/10 rounded-md py-5 sm:h-[6.5rem] md:h-28 pl-4 sm:pl-7 pr-8"
-                action="#"
-              >
-                <Input
-                  type="text"
-                  id="search"
-                  className="w-full placeholder-white/45 bg-transparent text-2xl xs:text-3xl outline-hidden"
-                  placeholder="چی دوست داری یاد بگیری ..."
-                  validations={[requiredValidator()]}
-                  onInputHandler={onInputHandler}
-                />
-                <Button
-                  className="text-4xl sm:text-5xl text-white/45"
-                  type="submit"
-                  onClick={search}
-                >
-                  <FaSearch />
-                </Button>
-              </form>
-            </div>
           </div>
           <div className="flex px-10 sm:px-20 md:px-0 max-w-[65rem] mx-auto justify-between items-center *:text-white/45 md:mb-8">
             <div className="flex-center flex-col">

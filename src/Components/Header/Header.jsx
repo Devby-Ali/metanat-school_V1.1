@@ -202,7 +202,7 @@ export default function Header() {
         </div>
       </div>
 
-      <header className="md:fixed md:flex md:top-5 2xl:top-7 md:right-0 md:left-0 z-40 justify-between items-center w-full md:w-97/100 lg:w-94/100 h-30 2xl:h-32 md:mx-auto md:rounded-2xl bg-linear-to-l from-sky-400/15 dark:from-sky-400/5 from-0% via-transparent via-50% md:via-65% to-sky-400/15 dark:to-sky-400/5 to-100% backdrop-blur-[6px] shadow-md">
+      <header className="md:fixed md:flex md:top-5 2xl:top-7 md:right-0 md:left-0 z-40 justify-between items-center w-full md:w-97/100 lg:w-94/100 h-30 2xl:h-32 md:mx-auto md:rounded-lg bg-linear-to-l from-sky-400/15 dark:from-sky-400/5 from-0% via-transparent via-50% md:via-65% to-sky-400/15 dark:to-sky-400/5 to-100% backdrop-blur-[6px] shadow-md">
         <div className="w-full h-full">
           <div className="h-full flex items-center justify-between px-10 py-4">
             <div
@@ -300,7 +300,7 @@ export default function Header() {
                 <>
                   <Link
                     to="#"
-                    className={`relative hidden md:flex-center items-center justify-center p-4 rounded-xl mr-4 transition-all duration-200 ${
+                    className={`relative hidden md:flex-center items-center justify-center p-4 rounded-md mr-4 transition-all duration-200 ${
                       openCollapse && "z-40 bg-white/10 dark:bg-white/5"
                     }`}
                     onClick={toggleOpen}
