@@ -25,6 +25,7 @@ import { GrUserAdmin } from "react-icons/gr";
 import Swal from "sweetalert2";
 import AuthContext from "../../context/authContext";
 import { TypeAnimation } from "react-type-animation";
+import { classesData } from "../../datas";
 
 export default function Landing({ info }) {
   const [dark, setDark] = useState(false);
@@ -32,6 +33,7 @@ export default function Landing({ info }) {
   const [openCollapse, setOpenCollapse] = useState(false);
   const [overlay, setOverlay] = useState(false);
   const [allMenus, setAllMenus] = useState([]);
+  const [classes, setClasses] = useState([]);
 
   const [formState, onInputHandler] = useForm(
     {
@@ -102,6 +104,7 @@ export default function Landing({ info }) {
       .then((menus) => {
         setAllMenus(menus);
       });
+      setClasses(classesData)
     console.log(authContext);
   }, []);
 
@@ -255,7 +258,7 @@ export default function Landing({ info }) {
                   <span className="cursor-pointer">
                     دوره های آموزشی
                     <ul className="main-header__dropdown group-hover/menu:main-header__dropdown-hover">
-                      {allMenus.map((menu) => (
+                      {classes.map((menu) => (
                         <li
                           className="main-header__dropdown-item header__item group/submenu"
                           key={menu._id}
