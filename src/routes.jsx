@@ -3,6 +3,7 @@ import CourseInfo from "./pages/CourseInfo/CourseInfo";
 import Category from "./pages/Category/Category";
 import ArticleInfo from "./pages/ArticleInfo/ArticleInfo";
 import Courses from "./pages/Courses/Courses";
+import AboutUs from "./pages/AboutUs/AboutUs"
 import Articles from "./pages/Articles/Articles";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -42,6 +43,7 @@ const routes = [
   { path: "/category-info/:categoryName/:page", element: <Category /> },
   { path: "/article-info/:articleName", element: <ArticleInfo /> },
   { path: "/courses/:page", element: <Courses /> },
+  { path: "/about-us", element: <AboutUs /> },
   { path: "/articles/:page", element: <Articles /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },

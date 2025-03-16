@@ -32,7 +32,6 @@ export default function Landing({ info }) {
   const [navOpen, setNavOpen] = useState(false);
   const [openCollapse, setOpenCollapse] = useState(false);
   const [overlay, setOverlay] = useState(false);
-  const [allMenus, setAllMenus] = useState([]);
   const [classes, setClasses] = useState([]);
 
   const [formState, onInputHandler] = useForm(
@@ -99,12 +98,7 @@ export default function Landing({ info }) {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/v1/menus`)
-      .then((res) => res.json())
-      .then((menus) => {
-        setAllMenus(menus);
-      });
-      setClasses(classesData)
+    setClasses(classesData);
     console.log(authContext);
   }, []);
 
@@ -184,7 +178,7 @@ export default function Landing({ info }) {
               دسته بندی ها
             </span>
           </li>
-          {allMenus.map((menu) => (
+          {classes.map((menu) => (
             <li
               key={menu._id}
               className={`rounded-md hover:bg-sky-500/70 dark:hover:bg-sky-900 ${
@@ -206,7 +200,7 @@ export default function Landing({ info }) {
               to="/articles/1"
               className="py-3 -mx-5 px-5 w-full rounded-md hover:bg-sky-400/80 dark:hover:bg-sky-900"
             >
-              <span className="w-full inline-block">مقالات</span>
+              <span className="w-full inline-block">رویدادها</span>
             </Link>
           </li>
         </ul>
@@ -253,7 +247,7 @@ export default function Landing({ info }) {
                 </svg>
               </Link>
 
-              <ul className="hidden md:flex gap-x-12 xl:gap-x-12 text-white text-[1.7rem] xl:text-[1.8rem] font-EstedadLight">
+              <ul className="hidden md:flex gap-x-12 xl:gap-x-16 text-white text-[1.7rem] xl:text-[1.8rem] font-EstedadLight">
                 <li className="main-header__item group/menu flex-center relative">
                   <span className="cursor-pointer">
                     دوره های آموزشی
@@ -292,17 +286,22 @@ export default function Landing({ info }) {
                   </span>
                 </li>
                 <li className="main-header__item flex-center relative">
-                  <Link to={"/courses/1"}>همه دوره ها</Link>
-                </li>
-                <li className="main-header__item flex-center relative">
                   <Link to={"/articles/1"} className="flex-center">
-                    مقالات
+                    رویداد ها
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div className="flex gap-x-6 items-center text-white">
+
+              <div className="hidden md:flex ml-3 xl:ml-5 text-white text-[1.7rem] font-EstedadMedium">
+                <Link
+                  to={"/about-us"}
+                >
+                  درباره ما
+                </Link>
+              </div>
               <div
                 className="hidden md:flex-center p-4 text-[2.75rem] rounded-xl toggle-theme cursor-pointer"
                 onClick={() => themeHandler()}
@@ -311,18 +310,11 @@ export default function Landing({ info }) {
                 <HiOutlineMoon className="inline-block dark:hidden " />
               </div>
 
-              <Link
-                to="#"
-                className="flex-center p-4 text-[2.75rem] rounded-xl"
-              >
-                <HiOutlineShoppingBag />
-              </Link>
-
               {authContext.userInfos.name ? (
                 <>
                   <Link
                     to="#"
-                    className={`relative hidden md:flex-center items-center justify-center p-4 rounded-xl transition-all duration-200 ${
+                    className={`relative flex-center items-center justify-center p-4 rounded-xl transition-all duration-200 ${
                       openCollapse && "z-40 bg-white/10 dark:bg-white/5"
                     }`}
                     onClick={toggleOpen}

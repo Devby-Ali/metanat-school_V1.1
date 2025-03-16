@@ -19,12 +19,14 @@ import {
 } from "react-icons/hi2";
 import Button from "../Form/Button";
 import Swal from "sweetalert2";
+import { classesData } from "../../datas";
 
 export default function Header() {
   const [dark, setDark] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const [openCollapse, setOpenCollapse] = useState(false);
   const [overlay, setOverlay] = useState(false);
+    const [classes, setClasses] = useState([]);
 
   const [allMenus, setAllMenus] = useState([]);
 
@@ -84,11 +86,8 @@ export default function Header() {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/v1/menus`)
-      .then((res) => res.json())
-      .then((menus) => {
-        setAllMenus(menus);
-      });
+    setClasses(classesData);
+    console.log(authContext);
   }, []);
 
   return (
@@ -160,7 +159,7 @@ export default function Header() {
               دسته بندی ها
             </span>
           </li>
-          {allMenus.map((menu) => (
+          {classes.map((menu) => (
             <li
               key={menu._id}
               className={`rounded-md hover:bg-sky-500/70 dark:hover:bg-sky-900 ${
@@ -182,7 +181,7 @@ export default function Header() {
               to="/articles/1"
               className="py-3 -mx-5 px-5 w-full rounded-md hover:bg-sky-400/80 dark:hover:bg-sky-900"
             >
-              <span className="w-full inline-block">مقالات</span>
+              <span className="w-full inline-block">رویداد ها</span>
             </Link>
           </li>
         </ul>
@@ -236,7 +235,7 @@ export default function Header() {
                   <span className="cursor-pointer">
                     دوره های آموزشی
                     <ul className="main-header__dropdown group-hover/menu:main-header__dropdown-hover text-slate-900 dark:text-white">
-                      {allMenus.map((menu) => (
+                    {classes.map((menu) => (
                         <li
                           className="main-header__dropdown-item header__item group/submenu"
                           key={menu._id}
@@ -274,7 +273,7 @@ export default function Header() {
                 </li>
                 <li className="main-header__item flex-center relative">
                   <Link to={"/articles/1"} className="flex-center">
-                    مقالات
+                    رویداد ها
                   </Link>
                 </li>
               </ul>
