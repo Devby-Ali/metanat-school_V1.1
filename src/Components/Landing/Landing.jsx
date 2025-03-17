@@ -1,11 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import LandingCounter from "../LandingCounter/LandingCounter";
-import Input from "../Form/Input";
-import { useForm } from "../../hooks/useForm";
 import Button from "../Form/Button";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { requiredValidator } from "../../validators/rules";
 import {
   HiBars3,
   HiChevronRight,
@@ -16,7 +12,6 @@ import {
   HiOutlineFolder,
   HiOutlineHome,
   HiOutlineMoon,
-  HiOutlineShoppingBag,
   HiOutlineSun,
   HiOutlineUser,
   HiPower,
@@ -34,15 +29,6 @@ export default function Landing({ info }) {
   const [overlay, setOverlay] = useState(false);
   const [classes, setClasses] = useState([]);
 
-  const [formState, onInputHandler] = useForm(
-    {
-      search: {
-        value: "",
-        isValid: false,
-      },
-    },
-    false
-  );
 
   const categoryName = useParams();
 
@@ -104,10 +90,6 @@ export default function Landing({ info }) {
 
   const navigate = useNavigate();
 
-  const search = (event) => {
-    event.preventDefault();
-    navigate(`search/${formState.inputs.search.value}`);
-  };
 
   return (
     <section className="relative bg-landing pb-28 xl:pb-24 2xl:pb-38 overflow-hidden mb-14 sm:mb-36 lg:mb-48 2xl:pt-2">
@@ -221,195 +203,188 @@ export default function Landing({ info }) {
       </div>
 
       <header className="lg:container md:flex justify-between items-center w-full md:mx-auto mb-10 sm:mb-16 md:mb-20 2xl:mb-28">
-        <div className="w-full h-full">
-          <div className="h-full flex items-center justify-between px-12 py-4">
-            <div
-              className="md:hidden flex-center p-4 text-white cursor-pointer text-5xl"
-              onClick={navOpenHandler}
+        <div className="h-full w-full flex items-center justify-between px-12 py-4">
+          <div
+            className="md:hidden flex-center p-4 text-white cursor-pointer text-5xl"
+            onClick={navOpenHandler}
+          >
+            <HiBars3 />
+          </div>
+
+          <div className="flex gap-x-8 xl:gap-x-14">
+            <Link
+              to={"/"}
+              className="text-sky-400 mb-1 2xl:mb-0 size-24 md:size-32 md:ml-5"
             >
-              <HiBars3 />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke="none" d="M0 0h24v24H0z"></path>
+                <path d="M18.316 5H5.684L2.266 9.019a1.09 1.09 0 0 0 .019 1.447L11.999 21l9.715-10.49a1.09 1.09 0 0 0 .024-1.444z"></path>
+                <path d="m9 11 3 3 3-3"></path>
+              </svg>
+            </Link>
+
+            <ul className="hidden md:flex gap-x-12 xl:gap-x-16 text-white text-[1.7rem] font-EstedadMedium">
+              <li className="main-header__item group/menu flex-center relative">
+                <span className="cursor-pointer">
+                  دوره های آموزشی
+                  <ul className="main-header__dropdown group-hover/menu:main-header__dropdown-hover">
+                    {classes.map((menu) => (
+                      <li
+                        className="main-header__dropdown-item header__item group/submenu"
+                        key={menu._id}
+                      >
+                        <Link
+                          to={`/category-info/${menu.href}/1`}
+                          className="flex items-center justify-between py-2.5 px-4 text-[1.6rem] duration-200"
+                        >
+                          {menu.title}
+                          {menu.submenus.length && (
+                            <>
+                              <HiMiniChevronLeft className="mt-1 text-4xl xl:mr-1" />
+                              <ul className="header__dropdown group-hover/submenu:header__dropdown-hover">
+                                {menu.submenus.map((submenu) => (
+                                  <li key={menu._id}>
+                                    <Link
+                                      to={submenu.href}
+                                      className="block px-8 py-2 text-[1.6rem] duration-200"
+                                    >
+                                      {submenu.title}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </span>
+              </li>
+              <li className="main-header__item flex-center relative">
+                <Link to={"/articles/1"} className="flex-center">
+                  رویداد ها
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex gap-x-6 items-center text-white">
+            <div className="hidden md:flex ml-3 xl:ml-5 text-white text-[1.7rem] font-EstedadMedium">
+              <Link to={"/about-us"}>درباره ما</Link>
+            </div>
+            <div
+              className="hidden md:flex-center p-4 text-[2.75rem] rounded-xl toggle-theme cursor-pointer"
+              onClick={() => themeHandler()}
+            >
+              <HiOutlineSun className="hidden dark:inline-block text-[2.9rem]" />
+              <HiOutlineMoon className="inline-block dark:hidden " />
             </div>
 
-            <div className="flex gap-x-8 xl:gap-x-14">
-              <Link
-                to={"/"}
-                className="text-sky-400 mb-1 2xl:mb-0 size-24 md:size-32 md:ml-5"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            {authContext.userInfos.name ? (
+              <>
+                <Link
+                  to="#"
+                  className={`relative flex-center items-center justify-center p-4 rounded-xl transition-all duration-200 ${
+                    openCollapse && "z-40 bg-white/10 dark:bg-white/5"
+                  }`}
+                  onClick={toggleOpen}
                 >
-                  <path stroke="none" d="M0 0h24v24H0z"></path>
-                  <path d="M18.316 5H5.684L2.266 9.019a1.09 1.09 0 0 0 .019 1.447L11.999 21l9.715-10.49a1.09 1.09 0 0 0 .024-1.444z"></path>
-                  <path d="m9 11 3 3 3-3"></path>
-                </svg>
-              </Link>
-
-              <ul className="hidden md:flex gap-x-12 xl:gap-x-16 text-white text-[1.7rem] xl:text-[1.8rem] font-EstedadLight">
-                <li className="main-header__item group/menu flex-center relative">
-                  <span className="cursor-pointer">
-                    دوره های آموزشی
-                    <ul className="main-header__dropdown group-hover/menu:main-header__dropdown-hover">
-                      {classes.map((menu) => (
-                        <li
-                          className="main-header__dropdown-item header__item group/submenu"
-                          key={menu._id}
-                        >
+                  <HiOutlineUser className="text-[2.75rem]" />
+                  <div
+                    className={`absolute top-32 left-0 w-96 z-50 ${
+                      openCollapse ? "block visible" : "hidden invisible"
+                    }`}
+                  >
+                    <div className="pt-8 pb-6 px-6 mx-auto bg-white dark:bg-slate-800 text-slate-900 dark:text-white/80 rounded-lg">
+                      <span className="text-3xl inline-block w-full pr-4 pb-10 pt-3 border-b dark:border-b-white/15 border-b-slate-800/30">
+                        {authContext.userInfos.name}
+                      </span>
+                      <ul className="*:transition-all *:pr-4 *:py-4 py-4 border-b dark:border-b-white/15 border-b-slate-800/30">
+                        {authContext.userInfos.role === "ADMIN" && (
+                          <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
+                            <Link
+                              className="flex items-center gap-x-4"
+                              to="/p-admin"
+                            >
+                              <span className="text-4xl">
+                                <GrUserAdmin />
+                              </span>
+                              <span>پنل مدیریت</span>
+                            </Link>
+                          </li>
+                        )}
+                        <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
                           <Link
-                            to={`/category-info/${menu.href}/1`}
-                            className="flex items-center justify-between py-2.5 px-4 text-[1.6rem] duration-200"
+                            className="flex items-center gap-x-4"
+                            to="/my-account"
                           >
-                            {menu.title}
-                            {menu.submenus.length && (
-                              <>
-                                <HiMiniChevronLeft className="mt-1 text-4xl xl:mr-1" />
-                                <ul className="header__dropdown group-hover/submenu:header__dropdown-hover">
-                                  {menu.submenus.map((submenu) => (
-                                    <li key={menu._id}>
-                                      <Link
-                                        to={submenu.href}
-                                        className="block px-8 py-2 text-[1.6rem] duration-200"
-                                      >
-                                        {submenu.title}
-                                      </Link>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </>
-                            )}
+                            <span className="text-4xl">
+                              <HiOutlineHome />
+                            </span>
+                            <span>پیشخوان</span>
                           </Link>
                         </li>
-                      ))}
-                    </ul>
-                  </span>
-                </li>
-                <li className="main-header__item flex-center relative">
-                  <Link to={"/articles/1"} className="flex-center">
-                    رویداد ها
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex gap-x-6 items-center text-white">
-
-              <div className="hidden md:flex ml-3 xl:ml-5 text-white text-[1.7rem] font-EstedadMedium">
-                <Link
-                  to={"/about-us"}
-                >
-                  درباره ما
-                </Link>
-              </div>
-              <div
-                className="hidden md:flex-center p-4 text-[2.75rem] rounded-xl toggle-theme cursor-pointer"
-                onClick={() => themeHandler()}
-              >
-                <HiOutlineSun className="hidden dark:inline-block text-[2.9rem]" />
-                <HiOutlineMoon className="inline-block dark:hidden " />
-              </div>
-
-              {authContext.userInfos.name ? (
-                <>
-                  <Link
-                    to="#"
-                    className={`relative flex-center items-center justify-center p-4 rounded-xl transition-all duration-200 ${
-                      openCollapse && "z-40 bg-white/10 dark:bg-white/5"
-                    }`}
-                    onClick={toggleOpen}
-                  >
-                    <HiOutlineUser className="text-[2.75rem]" />
-                    <div
-                      className={`absolute top-32 left-0 w-96 z-50 ${
-                        openCollapse ? "block visible" : "hidden invisible"
-                      }`}
-                    >
-                      <div className="pt-8 pb-6 px-6 mx-auto bg-white dark:bg-slate-800 text-slate-900 dark:text-white/80 rounded-lg">
-                        <span className="text-3xl inline-block w-full pr-4 pb-10 pt-3 border-b dark:border-b-white/15 border-b-slate-800/30">
-                          {authContext.userInfos.name}
+                        <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
+                          <Link
+                            className="flex items-center gap-x-4"
+                            to="/my-account/buyed"
+                          >
+                            <span className="text-4xl">
+                              <HiOutlineFolder />
+                            </span>
+                            <span>دوره های من</span>
+                          </Link>
+                        </li>
+                        <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
+                          <Link
+                            className="flex items-center gap-x-4"
+                            to="/my-account/tickets"
+                          >
+                            <span className="text-4xl">
+                              <HiOutlineChatBubbleLeftEllipsis />
+                            </span>
+                            <span>تیکت های من</span>
+                          </Link>
+                        </li>
+                        <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
+                          <Link
+                            className="flex items-center gap-x-4"
+                            to="/my-account/edit-account"
+                          >
+                            <span className="text-4xl">
+                              <HiOutlineUser />
+                            </span>
+                            <span>جزئیات حساب</span>
+                          </Link>
+                        </li>
+                      </ul>
+                      <Button
+                        className="flex w-full items-center gap-x-4 pr-4 py-[.8rem] mt-4.5 mb-0.5 rounded-md hover:bg-red-600/85 dark:hover:bg-red-700/60 hover:text-white"
+                        onClick={logoutUser}
+                      >
+                        <span className="text-4xl">
+                          <HiPower />
                         </span>
-                        <ul className="*:transition-all *:pr-4 *:py-4 py-4 border-b dark:border-b-white/15 border-b-slate-800/30">
-                          {authContext.userInfos.role === "ADMIN" && (
-                            <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
-                              <Link
-                                className="flex items-center gap-x-4"
-                                to="/p-admin"
-                              >
-                                <span className="text-4xl">
-                                  <GrUserAdmin />
-                                </span>
-                                <span>پنل مدیریت</span>
-                              </Link>
-                            </li>
-                          )}
-                          <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
-                            <Link
-                              className="flex items-center gap-x-4"
-                              to="/my-account"
-                            >
-                              <span className="text-4xl">
-                                <HiOutlineHome />
-                              </span>
-                              <span>پیشخوان</span>
-                            </Link>
-                          </li>
-                          <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
-                            <Link
-                              className="flex items-center gap-x-4"
-                              to="/my-account/buyed"
-                            >
-                              <span className="text-4xl">
-                                <HiOutlineFolder />
-                              </span>
-                              <span>دوره های من</span>
-                            </Link>
-                          </li>
-                          <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
-                            <Link
-                              className="flex items-center gap-x-4"
-                              to="/my-account/tickets"
-                            >
-                              <span className="text-4xl">
-                                <HiOutlineChatBubbleLeftEllipsis />
-                              </span>
-                              <span>تیکت های من</span>
-                            </Link>
-                          </li>
-                          <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
-                            <Link
-                              className="flex items-center gap-x-4"
-                              to="/my-account/edit-account"
-                            >
-                              <span className="text-4xl">
-                                <HiOutlineUser />
-                              </span>
-                              <span>جزئیات حساب</span>
-                            </Link>
-                          </li>
-                        </ul>
-                        <Button
-                          className="flex w-full items-center gap-x-4 pr-4 py-[.8rem] mt-4.5 mb-0.5 rounded-md hover:bg-red-600/85 dark:hover:bg-red-700/60 hover:text-white"
-                          onClick={logoutUser}
-                        >
-                          <span className="text-4xl">
-                            <HiPower />
-                          </span>
-                          <div>خروج</div>
-                        </Button>
-                      </div>
+                        <div>خروج</div>
+                      </Button>
                     </div>
-                  </Link>
-                </>
-              ) : (
-                <Link
-                  to="/login"
-                  className="flex-center w-[4.5rem] h-[4.5rem] text-slate-900 dark:text-white text-5xl rounded-lg mr-4 transition-all duration-200"
-                >
-                  <HiOutlineArrowLeftEndOnRectangle />
+                  </div>
                 </Link>
-              )}
-            </div>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                className="flex-center w-[4.5rem] h-[4.5rem] text-slate-900 dark:text-white text-5xl rounded-lg mr-4 transition-all duration-200"
+              >
+                <HiOutlineArrowLeftEndOnRectangle />
+              </Link>
+            )}
           </div>
         </div>
       </header>

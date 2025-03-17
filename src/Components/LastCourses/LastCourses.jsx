@@ -14,6 +14,8 @@ export default function LastCourses() {
       });
   }, []);
 
+  console.log(courses)
+
   return (
     <>
       <div className="mb-48">
