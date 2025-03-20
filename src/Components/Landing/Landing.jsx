@@ -20,7 +20,7 @@ import { GrUserAdmin } from "react-icons/gr";
 import Swal from "sweetalert2";
 import AuthContext from "../../context/authContext";
 import { TypeAnimation } from "react-type-animation";
-import { classesData } from "../../datas";
+import { menuData } from "../../datas";
 
 export default function Landing({ info }) {
   const [dark, setDark] = useState(false);
@@ -84,7 +84,7 @@ export default function Landing({ info }) {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    setClasses(classesData);
+    setClasses(menuData);
     console.log(authContext);
   }, []);
 
@@ -297,15 +297,15 @@ export default function Landing({ info }) {
                 >
                   <HiOutlineUser className="text-[2.75rem]" />
                   <div
-                    className={`absolute top-32 left-0 w-96 z-50 ${
+                    className={`absolute top-32 left-0 w-85 z-50 ${
                       openCollapse ? "block visible" : "hidden invisible"
                     }`}
                   >
-                    <div className="pt-8 pb-6 px-6 mx-auto bg-white dark:bg-slate-800 text-slate-900 dark:text-white/80 rounded-lg">
-                      <span className="text-3xl inline-block w-full pr-4 pb-10 pt-3 border-b dark:border-b-white/15 border-b-slate-800/30">
+                    <div className="pt-5 pb-3.5 px-6 mx-auto bg-white dark:bg-slate-800 text-slate-900 dark:text-white/80 rounded-lg">
+                      <span className="text-3xl inline-block w-full pr-4 pb-6 pt-3 border-b dark:border-b-white/15 border-b-slate-800/30">
                         {authContext.userInfos.name}
                       </span>
-                      <ul className="*:transition-all *:pr-4 *:py-4 py-4 border-b dark:border-b-white/15 border-b-slate-800/30">
+                      <ul className="*:transition-all *:pr-4 *:py-3 py-2 border-b dark:border-b-white/15 border-b-slate-800/30">
                         {authContext.userInfos.role === "ADMIN" && (
                           <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
                             <Link
@@ -315,7 +315,7 @@ export default function Landing({ info }) {
                               <span className="text-4xl">
                                 <GrUserAdmin />
                               </span>
-                              <span>پنل مدیریت</span>
+                              <span className="text-2xl">پنل مدیریت</span>
                             </Link>
                           </li>
                         )}
@@ -327,7 +327,7 @@ export default function Landing({ info }) {
                             <span className="text-4xl">
                               <HiOutlineHome />
                             </span>
-                            <span>پیشخوان</span>
+                            <span className="text-2xl">پیشخوان</span>
                           </Link>
                         </li>
                         <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
@@ -349,7 +349,7 @@ export default function Landing({ info }) {
                             <span className="text-4xl">
                               <HiOutlineChatBubbleLeftEllipsis />
                             </span>
-                            <span>تیکت های من</span>
+                            <span className="text-2xl">تیکت های من</span>
                           </Link>
                         </li>
                         <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
@@ -360,7 +360,7 @@ export default function Landing({ info }) {
                             <span className="text-4xl">
                               <HiOutlineUser />
                             </span>
-                            <span>جزئیات حساب</span>
+                            <span className="text-2xl">جزئیات حساب</span>
                           </Link>
                         </li>
                       </ul>
@@ -371,7 +371,7 @@ export default function Landing({ info }) {
                         <span className="text-4xl">
                           <HiPower />
                         </span>
-                        <div>خروج</div>
+                        <div className="text-2xl">خروج</div>
                       </Button>
                     </div>
                   </div>

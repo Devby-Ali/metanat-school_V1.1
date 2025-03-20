@@ -34,11 +34,11 @@ function AboutUs() {
         </div>
         <div className="container flex flex-col lg:flex-row">
           <div className="relative flex-center mt-16 mb-32 lg:mb-0 lg:w-full -mr-86 2xl:-mr-120">
-            <div className="absolute w-3/4 md:w-2/3 lg:w-3/4 h-[117%] lg:h-[115%] xl:h-[110%] bg-sky-600/80 dark:bg-sky-400/40 z-0 right-0 rounded-tl-[70px]"></div>
+            <div className="absolute w-3/4 md:w-2/3 lg:w-3/4 h-[117%] lg:h-[115%] xl:h-[110%] bg-sky-600/80 dark:bg-sky-400/40 right-0 rounded-tl-[70px] -z-10"></div>
             <img
               src="images/aboutUs.jpg"
               alt="aboutImg"
-              className="rounded-tl-[70px] max-h-170 2xl:max-h-220 z-10"
+              className="rounded-tl-[70px] max-h-170 2xl:max-h-220"
             />
           </div>
 

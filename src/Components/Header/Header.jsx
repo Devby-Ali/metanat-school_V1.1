@@ -199,7 +199,7 @@ export default function Header() {
         </div>
       </div>
 
-      <header className="md:fixed md:flex md:top-5 2xl:top-7 md:right-0 md:left-0 z-40 justify-between items-center w-full md:w-97/100 lg:w-95/100 h-30 2xl:h-32 md:mx-auto md:rounded-lg bg-linear-to-l from-sky-400/15 dark:from-sky-400/5 from-0% via-transparent via-50% md:via-65% to-sky-400/15 dark:to-sky-400/5 to-100% backdrop-blur-[6px] shadow-md md:shadow-none">
+      <header className="md:fixed md:flex md:top-5 2xl:top-7 md:right-0 md:left-0 z-50 justify-between items-center w-full md:w-97/100 lg:w-95/100 h-30 2xl:h-32 md:mx-auto md:rounded-lg bg-linear-to-l from-sky-400/15 dark:from-sky-400/5 from-0% via-transparent via-50% md:via-65% to-sky-400/15 dark:to-sky-400/5 to-100% backdrop-blur-[6px] shadow-md md:shadow-none">
         <div className="h-full w-full flex items-center justify-between px-10 py-4">
           <div
             className="md:hidden flex-center p-4 text-slate-900 dark:text-white cursor-pointer text-5xl"
@@ -278,7 +278,7 @@ export default function Header() {
               <Link to={"/about-us"}>درباره ما</Link>
             </div>
             <div
-              className="flex-center p-4 text-[2.75rem] rounded-xl toggle-theme cursor-pointer"
+              className="hidden md:flex-center p-4 text-[2.75rem] rounded-xl toggle-theme cursor-pointer"
               onClick={() => themeHandler()}
             >
               <HiOutlineSun className="hidden dark:inline-block text-[2.9rem]" />
@@ -289,22 +289,22 @@ export default function Header() {
               <>
                 <Link
                   to="#"
-                  className={`relative hidden md:flex-center items-center justify-center p-4 rounded-xl transition-all duration-200 ${
-                    openCollapse && "z-40 bg-white/10 dark:bg-white/5"
+                  className={`z-40 relative flex-center items-center justify-center p-4 rounded-xl transition-all duration-200 ${
+                    openCollapse && "bg-white/10 dark:bg-white/5"
                   }`}
                   onClick={toggleOpen}
                 >
                   <HiOutlineUser className="text-[2.75rem]" />
                   <div
-                    className={`absolute top-32 left-0 w-96 z-50 ${
+                    className={`absolute top-32 left-0 w-85 z-50 ${
                       openCollapse ? "block visible" : "hidden invisible"
                     }`}
                   >
-                    <div className="pt-8 pb-6 px-6 mx-auto bg-white dark:bg-slate-800 text-slate-900 dark:text-white/80 rounded-lg">
-                      <span className="text-3xl inline-block w-full pr-4 pb-10 pt-3 border-b dark:border-b-white/15 border-b-slate-800/30">
+                    <div className="pt-5 pb-3.5 px-6 mx-auto bg-white dark:bg-slate-800 text-slate-900 dark:text-white/80 rounded-lg z-40">
+                      <span className="text-3xl inline-block w-full pr-4 pb-6 pt-3 border-b dark:border-b-white/15 border-b-slate-800/30">
                         {authContext.userInfos.name}
                       </span>
-                      <ul className="*:transition-all *:pr-4 *:py-4 py-4 border-b dark:border-b-white/15 border-b-slate-800/30">
+                      <ul className="*:transition-all *:pr-4 *:py-3 py-2 border-b dark:border-b-white/15 border-b-slate-800/30">
                         {authContext.userInfos.role === "ADMIN" && (
                           <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
                             <Link
@@ -314,7 +314,7 @@ export default function Header() {
                               <span className="text-4xl">
                                 <GrUserAdmin />
                               </span>
-                              <span>پنل مدیریت</span>
+                              <span className="text-2xl">پنل مدیریت</span>
                             </Link>
                           </li>
                         )}
@@ -326,7 +326,7 @@ export default function Header() {
                             <span className="text-4xl">
                               <HiOutlineHome />
                             </span>
-                            <span>پیشخوان</span>
+                            <span className="text-2xl">پیشخوان</span>
                           </Link>
                         </li>
                         <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
@@ -348,7 +348,7 @@ export default function Header() {
                             <span className="text-4xl">
                               <HiOutlineChatBubbleLeftEllipsis />
                             </span>
-                            <span>تیکت های من</span>
+                            <span className="text-2xl">تیکت های من</span>
                           </Link>
                         </li>
                         <li className="rounded-md hover:bg-sky-600 dark:hover:bg-sky-800 hover:text-white">
@@ -359,7 +359,7 @@ export default function Header() {
                             <span className="text-4xl">
                               <HiOutlineUser />
                             </span>
-                            <span>جزئیات حساب</span>
+                            <span className="text-2xl">جزئیات حساب</span>
                           </Link>
                         </li>
                       </ul>
@@ -370,7 +370,7 @@ export default function Header() {
                         <span className="text-4xl">
                           <HiPower />
                         </span>
-                        <div>خروج</div>
+                        <div className="text-2xl">خروج</div>
                       </Button>
                     </div>
                   </div>
@@ -387,10 +387,10 @@ export default function Header() {
           </div>
         </div>
       </header>
-      {/* <div
+      <div
         onClick={overlayOnClick}
         className={overlay ? "overlay overlay--visible" : "overlay"}
-      ></div> */}
+      ></div>
     </>
   );
 }
