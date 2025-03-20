@@ -49,17 +49,13 @@ export default function Footer() {
         <div className="pb-8 mb-8 sm:pb-16 sm:mb-16 border-b border-b-slate-400/60">
           <div className="flex items-center justify-between">
             <Link to={"/"} className="flex items-end text-sky-500">
-              <div className="rotate-[40deg] mb-1 sm:mb-2">
+              <div className="rotate-[40deg]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="65"
                   height="65"
                   fill="none"
                   stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="icon icon-tabler icons-tabler-outline icon-tabler-brand-my-oppo"
                   viewBox="0 0 24 24"
                 >
                   <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -67,8 +63,8 @@ export default function Footer() {
                   <path d="m9 11 3 3 3-3"></path>
                 </svg>
               </div>
-              <span className="font-MikhakWoff2one text-5xl sm:text-6xl font-bold -mr-4">
-                SKYTech
+              <span className="font-EstedadLight text-5xl sm:text-6xl font-bold -mr-4">
+                متانت
               </span>
             </Link>
             <div className="flex gap-x-4 sm:gap-x-5">
