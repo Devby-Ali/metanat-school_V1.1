@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
-// import Topbar from "./../../Components/Topbar/Topbar";
 import Header from "./../../Components/Header/Header";
 import CourseBox from "../../Components/CourseBox/CourseBox";
 import Pagination from "../../Components/Pagination/Pagination";
 import Footer from "./../../Components/Footer/Footer";
-import { TbBorderAll } from "react-icons/tb";
-import { FaAlignLeft, FaSquare } from "react-icons/fa";
-import { GoTriangleDown } from "react-icons/go";
-import { FaSearch } from "react-icons/fa";
+import { FaSquare } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import {
   HiArrowsUpDown,
   HiMagnifyingGlass,
-  HiOutlineCheckCircle,
   HiOutlineFunnel,
   HiOutlineTrash,
-  HiOutlineXCircle,
 } from "react-icons/hi2";
 import Button from "../../Components/Form/Button";
 import SectionHeader from "../../Components/SectionHeader/SectionHeader";
 import SortedCourses from "../../Components/SortedCourses/SortedCourses";
 import FilteredCourses from "../../Components/FilteredCourses/FilteredCourses";
+import { categoryData } from "../../datas";
 
 export default function Category() {
   const [courses, setCourses] = useState([]);
@@ -62,14 +57,19 @@ export default function Category() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
-      .then((res) => res.json())
-      .then((allCourses) => {
-        setCourses(allCourses);
-        setOrderedCourses(allCourses);
-        setStatusTitle("همه دوره ها");
-        setStatus("default");
-      });
+    // fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
+    //   .then((res) => res.json())
+    //   .then((allCourses) => {
+    //     setCourses(allCourses);
+    //     setOrderedCourses(allCourses);
+    //     setStatusTitle("همه دوره ها");
+    //     setStatus("default");
+    //   });
+    setCourses(categoryData[categoryName]);
+    setOrderedCourses(categoryData[categoryName]);
+    setStatusTitle("همه دوره ها");
+    setStatus("default");
+    console.log(categoryData[categoryName]);
   }, [categoryName]);
 
   useEffect(() => {
