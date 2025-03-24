@@ -22,7 +22,7 @@ export default function Pagination({
   }, [page, items]);
 
   return (
-    <div className="my-12">
+    <div className="mt-24">
       <ul className="flex-center text-slate-900 dark:text-white">
         {Array(pagesCount)
           .fill(0)

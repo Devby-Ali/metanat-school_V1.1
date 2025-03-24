@@ -72,7 +72,7 @@ export default function Category() {
                 titleValue={`${courses.length} دوره ی آموزشی`}
               />
 
-              <section className="grid grid-cols-12 gap-y-5 md:gap-x-12 text-slate-900 dark:text-white ">
+              <section className="grid grid-cols-12 gap-y-5 md:gap-x-12 text-slate-900 dark:text-white">
                 {/* <!-- Sidebar --> */}
                 <aside className="col-span-full top-6 space-y-6 mb-8">
                   {/* <!-- SearchBox --> */}
@@ -118,7 +118,7 @@ export default function Category() {
                   <Pagination
                     items={orderedCourses}
                     itemsCount={8}
-                    pathName="/courses"
+                    pathName={`/category-info/${categoryName}`}
                     setShownItems={setShownCourses}
                   />
                 </section>
